@@ -7,9 +7,15 @@ import botocore.exceptions
 import uuid
 import os
 import time
+import logging
+import watchtower
 
 # Use default credentials from AWS CLI (shared config file or env)
 s3 = boto3.client('s3')
+
+# Set up logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 # Create a unique bucket name
 bucket_name = f"my-test-bucket-{uuid.uuid4()}"
@@ -18,10 +24,19 @@ bucket_name = f"my-test-bucket-{uuid.uuid4()}"
 file_name = "test_file.txt"
 
 try:
+
     print(f"1. Creating bucket: {bucket_name}")
 
     session = boto3.Session()
     region = session.region_name or 'us-east-1'
+
+    logger.addHandler(watchtower.CloudWatchLogHandler(
+        log_group="MyPythonS3Logs",
+        stream_name="local-script"
+    ))
+
+    # This log should show up in CloudWatch
+    logger.info("Hello from your local Python script!")
 
     s3 = session.client('s3', region_name=region)
 
