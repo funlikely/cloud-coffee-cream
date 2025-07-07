@@ -10,9 +10,15 @@ python -m venv venv
 .\venv\Scripts\activate
 ```
 
-### Install SDK
+### Install SDK and dependencies
 
 ```
-pip install boto3
+pip install -r requirements.txt
+```
+
+### Test out the program
+
+```
+python s3-work.py
 ```
 
