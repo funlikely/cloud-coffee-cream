@@ -16,3 +16,8 @@ python -m venv venv
 pip install boto3
 ```
 
+### Run
+
+```
+python .\s3-work.py
+```
