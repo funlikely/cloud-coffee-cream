@@ -22,3 +22,8 @@ pip install -r requirements.txt
 python s3-work.py
 ```
 
+### Run
+
+```
+python .\s3-work.py
+```
